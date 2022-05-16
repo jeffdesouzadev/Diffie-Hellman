@@ -1,7 +1,13 @@
 {
+  "scripts": {
+    "start": "nodemon ./server.js",
+    "client": "nodemon ./client.js",
+    "server": "nodemon ./server.js"
+  },
   "dependencies": {
     "axios": "^0.27.2",
     "express": "^4.18.1",
-    "node": "^17.7.2"
+    "node": "^17.7.2",
+    "nodemon": "^2.0.16"
   }
 }
