@@ -16,6 +16,7 @@ let publicKey = undefined
 //this project after this initial exploration of the
 //problem space.
 const privateKey = 11
+console.log("0. <START> server private key is ", privateKey)
 
 const serverHello = function() {
   var config = {
@@ -26,23 +27,26 @@ const serverHello = function() {
   return axios(config);
 }
 
-
-
-app.get('/receiveGA', (req, res) => {
-  const ga = req.query.ga
-  console.log('publicKey ^ client-secret is', ga)
-  const mod = Math.pow(ga, privateKey) % upperBound
-  console.log('publicKey ^ client ^ server is', Math.pow(ga, privateKey))
-  console.log('...and the modulo is', mod)
-
-  res.status(200).send({publicKey})
-})
-
 app.get('/serverHello', (req, res) => {
   const keys = req.query.keys
   const keyIndex = Math.floor(Math.random()*keys.length)
   publicKey = keys[keyIndex]
-  res.status(200).send({'publicKey': publicKey, 'gb': Math.pow(publicKey, privateKey)})
+  console.log("2. <SEND> from public keys offered, choosing ", publicKey)
+  const gb = Math.pow(publicKey, privateKey)
+  console.log("3. <MATH> publicKey ^ server-secret is ", gb)
+  console.log(`4. <SEND> ${publicKey}^${privateKey} = ${gb}`)
+  res.status(200).send({'publicKey': publicKey, 'gb': gb})
+})
+
+app.get('/receiveGA', (req, res) => {
+  const ga = req.query.ga
+  console.log('10. <Received> publicKey ^ client-secret is', ga)
+  const mod = Math.pow(ga, privateKey) % upperBound
+  console.log('11. <MATH> publicKey ^ client ^ server is', Math.pow(ga, privateKey))
+  console.log('12. <MATH> ...and the modulo is', mod)
+  console.log('13. PROFIT: we can now encrypt using our shared key:', mod)
+
+  res.status(200).send("Hey, don't tell anyone that our secret, shared password is ", mod, ", okay?")
 })
 
 app.listen(PORT, ()=> {
