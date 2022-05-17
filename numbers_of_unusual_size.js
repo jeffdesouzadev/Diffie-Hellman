@@ -14,20 +14,29 @@ class NumberOfUnusualSize{
   }
 
   toString() {
-    let padding=1
     let msd = ''
-    let lsd = ''
-    if (padding*2 <= this.numberStore.length) {
-      for (let k = 0; k < this.numberStore.length && k < padding; k++){
+    if (this.numberStore.length < 23) {
+      // console.log(this.numberStore)
+      for (let k = 0; k < this.numberStore.length; k++){
         msd += (this.numberStore[k])
       }
-      for (let m = this.numberStore.length-padding; m < this.numberStore.length; m++) {
-        lsd += (this.numberStore[m])
-      }
-      console.log(msd + "..." + lsd)
-      return msd + "..." + lsd
+      return msd
     } else {
-      console.error("number is too small for given padding (consider a regular variable??)");
+        let padding=11
+        let msd = ''
+        let lsd = ''
+        if (padding*2 <= this.numberStore.length) {
+        for (let k = 0; k < this.numberStore.length && k < padding; k++){
+          msd += (this.numberStore[k])
+        }
+        for (let m = this.numberStore.length-padding; m < this.numberStore.length; m++) {
+          lsd += (this.numberStore[m])
+        }
+        console.log(msd + "..." + lsd)
+        return msd + "..." + lsd
+      } else {
+        console.error("number is too small for given padding (consider a regular variable??)");
+      }
     }
   }
 
@@ -48,6 +57,12 @@ class NumberOfUnusualSize{
 
   compare = function(compareNum) {
     //compareNum MUST be a NumberOfUnusualSize
+    while (compareNum.numberStore[0] === 0) {
+      compareNum.numberStore.shift()
+    }
+    while (this.numberStore[0] === 0) {
+      this.numberStore.shift()
+    }
     if (compareNum.numberStore.length !== this.numberStore.length) {
       return false
     } else {
@@ -138,10 +153,11 @@ class NumberOfUnusualSize{
         let productRow = []
         let lsdIndex = undefined
         for (let multiplicand2 = compareNum.length-1; multiplicand2 >=0; multiplicand2--) {
-          lsdIndex = compareNum.length-1-multiplicand1
+          //lsdIndex = compareNum.length-1-multiplicand1
+          lsdIndex = this.numberStore.length-1-multiplicand1
           let curProd = this.multiplyDigit(thisNum[multiplicand1], compareNum[multiplicand2], prevProd.carry)
-            //m1[0][1][7]
-            //m2[0][1][3]
+            //m2[0][1][7] compareNum
+            //m1[0][1][3] this
             //-----------
             //m3[0][3+2][1]
             // [0][1][7][0]
@@ -158,6 +174,7 @@ class NumberOfUnusualSize{
         }
         // console.log('Product Row is', productRow)
         totals.push(productRow)
+        console.log(`${this.toString()} x ${multiplicand}`, "; totals are", totals)
         //console.log('Product Row is', productRow, 'x (10 x', lsdIndex, ')')
       }
       // console.log("totals is", totals)
@@ -168,7 +185,8 @@ class NumberOfUnusualSize{
           sum = sum.add(addend)
         }
         let k = 0;
-        while (sum.numberStore[k] === 0 && k < sum.numberStore.length) {
+        while (sum.numberStore[0] === 0 && k < sum.numberStore.length) {
+          console.log(k, 'numberStore is', sum.numberStore)
           sum.numberStore.shift()
           k++
         }
@@ -191,9 +209,9 @@ class NumberOfUnusualSize{
 
     } else {
       for (let k = 1; k < exponent; k++) {
-        console.log('product is ', product.numberStore)
+        // console.log('product is ', product.numberStore)
         product = product.multiply(multiplicand)
-        console.log('after multiplying, product is', product.numberStore)
+        // console.log('after multiplying, product is', product.numberStore)
       }
     }
 
