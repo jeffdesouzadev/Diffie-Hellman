@@ -1,6 +1,5 @@
 class NumberOfUnusualSize{
   constructor(initialValue) {
-    // console.log('iv is ', initialValue)
     this.numberStore = []
     if (Array.isArray(initialValue)) {
       this.numberStore = initialValue
@@ -169,15 +168,14 @@ class NumberOfUnusualSize{
           sum = sum.add(addend)
         }
         let k = 0;
-        while (sum[k] === 0 && k < sum.length) {
-          sum.shift()
+        while (sum.numberStore[k] === 0 && k < sum.numberStore.length) {
+          sum.numberStore.shift()
           k++
         }
-        console.log('product is', sum)
+        //console.log('product is', sum)
+        return sum
       }
-
     }
   }
-
 }
 module.exports = NumberOfUnusualSize
