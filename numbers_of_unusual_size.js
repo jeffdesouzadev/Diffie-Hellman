@@ -177,5 +177,20 @@ class NumberOfUnusualSize{
       }
     }
   }
+
+  pow = function(exponent) {
+    //todo: allow an exponent of UnusualSize
+    let multiplicand = new NumberOfUnusualSize(this.numberStore)
+    let product = new NumberOfUnusualSize(this.numberStore)
+    for (let k = 1; k < exponent; k++) {
+      product = this.multiply(multiplicand)
+    }
+    let k = 0;
+    while (product.numberStore[k] === 0 && k < product.numberStore.length) {
+      product.numberStore.shift()
+      k++
+    }
+    return product
+  }
 }
 module.exports = NumberOfUnusualSize

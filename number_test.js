@@ -14,3 +14,6 @@ console.log(`${s} added to ${t}`, `${x}`)
 
 let y = t.multiply(s)
 console.log('multiply object', y)
+
+let z = t.pow(4)
+console.log('pow object', z)
