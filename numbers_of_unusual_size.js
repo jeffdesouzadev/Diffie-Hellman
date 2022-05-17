@@ -15,29 +15,28 @@ class NumberOfUnusualSize{
 
   toString() {
     let msd = ''
-    if (this.numberStore.length < 23) {
+    // if (this.numberStore.length < 23) { //maybe enable for numbers over ...50 digits long?
       // console.log(this.numberStore)
       for (let k = 0; k < this.numberStore.length; k++){
         msd += (this.numberStore[k])
       }
       return msd
-    } else {
-        let padding=11
-        let msd = ''
-        let lsd = ''
-        if (padding*2 <= this.numberStore.length) {
-        for (let k = 0; k < this.numberStore.length && k < padding; k++){
-          msd += (this.numberStore[k])
-        }
-        for (let m = this.numberStore.length-padding; m < this.numberStore.length; m++) {
-          lsd += (this.numberStore[m])
-        }
-        console.log(msd + "..." + lsd)
-        return msd + "..." + lsd
-      } else {
-        console.error("number is too small for given padding (consider a regular variable??)");
-      }
-    }
+    // } else { //maybe enable for numbers over ...50 digits long?
+    //   let padding=11
+    //   let lsd = ''
+    //   if (padding*2 <= this.numberStore.length) {
+    //     for (let k = 0; k < this.numberStore.length && k < padding; k++){
+    //       msd += (this.numberStore[k])
+    //     }
+    //     for (let m = this.numberStore.length-padding; m < this.numberStore.length; m++) {
+    //       lsd += (this.numberStore[m])
+    //     }
+    //     console.log(msd + "..." + lsd)
+    //     return msd + "..." + lsd
+    //   } else {
+    //     console.error("number is too small for given padding (consider a regular variable??)");
+    //   }
+    // }
   }
 
   equals = function(compareNum) {
