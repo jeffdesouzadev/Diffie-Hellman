@@ -177,7 +177,7 @@ class NumberOfUnusualSize{
         //console.log('Product Row is', productRow, 'x (10 x', lsdIndex, ')')
       }
       // console.log("totals is", totals)
-      if (totals.length > 1) {
+      if (totals.length > 0) {
         let sum = new NumberOfUnusualSize(totals[0])
         for (let k = 1; k < totals.length; k++) {
           let addend = new NumberOfUnusualSize(totals[k])
@@ -192,6 +192,8 @@ class NumberOfUnusualSize{
         //console.log('product is', sum)
         return sum
       }
+    } else {
+      console.error("ERROR: can only multiply by another NOUS")
     }
   }
 
