@@ -1,13 +1,17 @@
 class NumberOfUnusualSize{
   constructor(initialValue) {
     // console.log('iv is ', initialValue)
-    const strInitialValue = initialValue.toString()
-    // console.log('strIV is', strInitialValue)
     this.numberStore = []
-    for (let k = 0; k < strInitialValue.length; k++) {
-      this.numberStore.push(parseInt(strInitialValue[k]))
+    if (Array.isArray(initialValue)) {
+      this.numberStore = initialValue
+    } else {
+      const strInitialValue = initialValue.toString()
+
+      for (let k = 0; k < strInitialValue.length; k++) {
+        this.numberStore.push(parseInt(strInitialValue[k]))
+      }
     }
-    // console.log('created NOUS for ', this.numberStore)
+
   }
 
   toString() {
@@ -101,8 +105,13 @@ class NumberOfUnusualSize{
       if (prevState.carry > 0){
         sum.unshift(1)
       }
+      let k = 0;
+      while (sum[k] === 0 && k < sum.length) {
+        sum.shift()
+        k++
+      }
       console.log (`sum is ${sum}`)
-      return new NumberOfUnusualSize(sum.toString())
+      return new NumberOfUnusualSize(sum)
     }
   }
 
@@ -149,8 +158,24 @@ class NumberOfUnusualSize{
 
         }
         console.log('Product Row is', productRow)
+        totals.push(productRow)
         //console.log('Product Row is', productRow, 'x (10 x', lsdIndex, ')')
       }
+      console.log("totals is", totals)
+      if (totals.length > 1) {
+        let sum = new NumberOfUnusualSize(totals[0])
+        for (let k = 1; k < totals.length; k++) {
+          let addend = new NumberOfUnusualSize(totals[k])
+          sum = sum.add(addend)
+        }
+        let k = 0;
+        while (sum[k] === 0 && k < sum.length) {
+          sum.shift()
+          k++
+        }
+        console.log('product is', sum)
+      }
+
     }
   }
 
