@@ -56,10 +56,10 @@ class NumberOfUnusualSize{
 
   compare = function(compareNum) {
     //compareNum MUST be a NumberOfUnusualSize
-    while (compareNum.numberStore[0] === 0) {
+    while (compareNum.numberStore[0] === 0 && compareNum.numberStore.length > 1) {
       compareNum.numberStore.shift()
     }
-    while (this.numberStore[0] === 0) {
+    while (this.numberStore[0] === 0 && this.numberStore.length > 1) {
       this.numberStore.shift()
     }
     if (compareNum.numberStore.length !== this.numberStore.length) {
@@ -118,10 +118,10 @@ class NumberOfUnusualSize{
       if (prevState.carry > 0){
         sum.unshift(1)
       }
-      let k = 0;
-      while (sum[k] === 0 && k < sum.length) {
+      // let k = 0;
+      while (sum[0] === 0 && sum.length > 1) {
         sum.shift()
-        k++
+        // k++
       }
       // console.log (`sum is ${sum}`)
       return new NumberOfUnusualSize(sum)
@@ -183,11 +183,11 @@ class NumberOfUnusualSize{
           let addend = new NumberOfUnusualSize(totals[k])
           sum = sum.add(addend)
         }
-        let k = 0;
-        while (sum.numberStore[0] === 0 && k < sum.numberStore.length) {
+        // let k = 0;
+        while (sum.numberStore[0] === 0 && sum.numberStore.length > 1) {
           console.log(k, 'numberStore is', sum.numberStore)
           sum.numberStore.shift()
-          k++
+          // k++
         }
         //console.log('product is', sum)
         return sum
@@ -217,11 +217,11 @@ class NumberOfUnusualSize{
     }
 
 
-    let k = 0;
-    while (product.numberStore[0] === 0 && k < product.numberStore.length) {
+    // let k = 0;
+    while (product.numberStore[0] === 0 && product.numberStore.length > 1) {
       console.log('shifting out first bit of ', product.numberStore)
       product.numberStore.shift()
-      k++
+      // k++
     }
     return product
   }
@@ -285,7 +285,7 @@ class NumberOfUnusualSize{
         console.error('this should never happen since we are not decrementing from zero')
       }
       let k = 0;
-      while (difference[k] === 0 && k < difference.length) {
+      while (difference[0] === 0 && difference.length > 1) {
         difference.shift()
         k++
       }

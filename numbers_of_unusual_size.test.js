@@ -41,16 +41,16 @@ test(`adds ${g} + ${h} to be 679012344679012344679012344679012344679012344679012
 
 //small multiplications
 
-// test(`multiplies ${zero} x ${three} to be ${("0")}`, () => {
-//   expect((zero.multiply(three)).toString()).toBe( "0" );
-// });
+test(`multiplies ${zero} x ${three} to be ${("0")}`, () => {
+  expect((zero.multiply(three)).toString()).toBe( "0" );
+});
 
 test(`multiplies ${one} x ${three} to be ${("3")}`, () => {
-  expect(t.toString()).toBe( "3" );
+  expect(one.multiply(three).toString()).toBe( "3" );
 });
-// test(`multiplies ${two} x ${three} to be ${("6")}`, () => {
-//   expect( (two.multiply(three)).toString() ).toBe( "6" );
-// });
-// test(`multiplies ${three} x ${zero} to be ${("3")}`, () => {
-//   expect((three.multiply(zero)).toString()).toBe( "0" );
-// });
+test(`multiplies ${two} x ${three} to be ${("6")}`, () => {
+  expect( (two.multiply(three)).toString() ).toBe( "6" );
+});
+test(`multiplies ${three} x ${zero} to be ${("3")}`, () => {
+  expect((three.multiply(zero)).toString()).toBe( "0" );
+});
