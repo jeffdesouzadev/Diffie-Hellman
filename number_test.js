@@ -10,10 +10,15 @@ let t = new NumberOfUnusualSize(12)
 
 let q = 123456789
 let x = t.add(s);
-console.log(`${s} added to ${t}`, `${x}`)
+// console.log(`${s} added to ${t}`, `${x}`)
 
 let y = t.multiply(s)
-console.log('multiply object', y)
+// console.log('multiply object', y)
 
 let z = t.pow(4)
 console.log('pow object', z)
+
+// console.log(z.getValue())
+
+// s.decrement()
+// console.log(s)
