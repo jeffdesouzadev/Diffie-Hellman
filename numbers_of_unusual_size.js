@@ -197,22 +197,24 @@ class NumberOfUnusualSize{
     }
   }
 
-  pow = function(exponent) {
+  pow = function(exp) {
     //todo: allow an exponent of UnusualSize
     let multiplicand = new NumberOfUnusualSize(this.numberStore)
     let product = new NumberOfUnusualSize(this.numberStore)
+    let exponent = new NumberOfUnusualSize(exp)
 
     if (exponent instanceof NumberOfUnusualSize) {
-      if (exponent.getValue() > 0) {
-        product = this.multiply(multiplicand)
+
+      while (exponent.getValue() > 1) {
+        product = product.multiply(multiplicand)
         exponent.decrement()
       }
 
     } else {
       for (let k = 1; k < exponent; k++) {
-        // console.log('product is ', product.numberStore)
+        console.log('before the '+k+'th multiply, product is ', product.numberStore)
         product = product.multiply(multiplicand)
-        // console.log('after multiplying, product is', product.numberStore)
+        console.log('after multiplying, product is', product.numberStore)
       }
     }
 
