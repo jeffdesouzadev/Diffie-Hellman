@@ -15,28 +15,26 @@ class NumberOfUnusualSize{
 
   toString() {
     let msd = ''
-    // if (this.numberStore.length < 23) { //maybe enable for numbers over ...50 digits long?
-      // console.log(this.numberStore)
+    if (this.numberStore.length < 400) {
       for (let k = 0; k < this.numberStore.length; k++){
         msd += (this.numberStore[k])
       }
       return msd
-    // } else { //maybe enable for numbers over ...50 digits long?
-    //   let padding=11
-    //   let lsd = ''
-    //   if (padding*2 <= this.numberStore.length) {
-    //     for (let k = 0; k < this.numberStore.length && k < padding; k++){
-    //       msd += (this.numberStore[k])
-    //     }
-    //     for (let m = this.numberStore.length-padding; m < this.numberStore.length; m++) {
-    //       lsd += (this.numberStore[m])
-    //     }
-    //     console.log(msd + "..." + lsd)
-    //     return msd + "..." + lsd
-    //   } else {
-    //     console.error("number is too small for given padding (consider a regular variable??)");
-    //   }
-    // }
+    } else { //maybe enable for numbers over ...50 digits long?
+      let padding=100
+      let lsd = ''
+      if (padding*2 <= this.numberStore.length) {
+        for (let k = 0; k < this.numberStore.length && k < padding; k++){
+          msd += (this.numberStore[k])
+        }
+        for (let m = this.numberStore.length-padding; m < this.numberStore.length; m++) {
+          lsd += (this.numberStore[m])
+        }
+        return msd + "..." + lsd
+      } else {
+        console.error("number is too small for given padding (consider a regular variable??)");
+      }
+    }
   }
 
   equals = function(compareNum) {
@@ -92,21 +90,16 @@ class NumberOfUnusualSize{
     if (addend instanceof NumberOfUnusualSize) {
       let compareNum = addend.numberStore;
       let thisNum = this.numberStore;
-      // console.log('Add function called with ', compareNum, thisNum)
       if (compareNum.length > this.numberStore.length) {
         const zeroPads = compareNum.length - thisNum.length
         for (let k = 0; k < zeroPads; k++) {
           thisNum.unshift(0)
         }
-        // console.log('this Num is now ', thisNum)
-        // console.log('compareNum is still ', compareNum)
       } else if (compareNum.length < this.numberStore.length) {
         const zeroPads = thisNum.length - compareNum.length
         for (let k = 0; k < zeroPads; k++) {
           compareNum.unshift(0)
         }
-        // console.log('this Num is still ', thisNum)
-        // console.log('compareNum is now ', compareNum)
       }
       let prevState = {sum: 0, carry: 0}
       let sum = []
@@ -118,12 +111,9 @@ class NumberOfUnusualSize{
       if (prevState.carry > 0){
         sum.unshift(1)
       }
-      // let k = 0;
       while (sum[0] === 0 && sum.length > 1) {
         sum.shift()
-        // k++
       }
-      // console.log (`sum is ${sum}`)
       return new NumberOfUnusualSize(sum)
     }
   }
@@ -152,14 +142,8 @@ class NumberOfUnusualSize{
         let productRow = []
         let lsdIndex = undefined
         for (let multiplicand2 = compareNum.length-1; multiplicand2 >=0; multiplicand2--) {
-          //lsdIndex = compareNum.length-1-multiplicand1
           lsdIndex = this.numberStore.length-1-multiplicand1
           let curProd = this.multiplyDigit(thisNum[multiplicand1], compareNum[multiplicand2], prevProd.carry)
-            //m2[0][1][7] compareNum
-            //m1[0][1][3] this
-            //-----------
-            //m3[0][3+2][1]
-            // [0][1][7][0]
           productRow.unshift(curProd.product)
           prevProd = curProd
         }
@@ -167,16 +151,11 @@ class NumberOfUnusualSize{
           productRow.unshift(prevProd.carry)
         }
         for (let k = 0; k < lsdIndex; k++) {
-          // console.log('pushing 0 now')
           productRow.push(0)
-
         }
-        // console.log('Product Row is', productRow)
         totals.push(productRow)
-        console.log(`${this.toString()} x ${multiplicand}`, "; totals are", totals)
-        //console.log('Product Row is', productRow, 'x (10 x', lsdIndex, ')')
       }
-      // console.log("totals is", totals)
+
       if (totals.length > 0) {
         let sum = new NumberOfUnusualSize(totals[0])
         for (let k = 1; k < totals.length; k++) {
@@ -185,11 +164,9 @@ class NumberOfUnusualSize{
         }
         // let k = 0;
         while (sum.numberStore[0] === 0 && sum.numberStore.length > 1) {
-          console.log(k, 'numberStore is', sum.numberStore)
           sum.numberStore.shift()
-          // k++
         }
-        //console.log('product is', sum)
+
         return sum
       }
     } else {
@@ -212,16 +189,13 @@ class NumberOfUnusualSize{
 
     } else {
       for (let k = 1; k < exponent; k++) {
-        console.log('before the '+k+'th multiply, product is ', product.numberStore)
         product = product.multiply(multiplicand)
-        console.log('after multiplying, product is', product.numberStore)
       }
     }
 
 
     // let k = 0;
     while (product.numberStore[0] === 0 && product.numberStore.length > 1) {
-      console.log('shifting out first bit of ', product.numberStore)
       product.numberStore.shift()
       // k++
     }
@@ -273,8 +247,6 @@ class NumberOfUnusualSize{
       for (let k = 0; k < zeroPads; k++) {
         compareNum.unshift(0)
       }
-      // console.log('this Num is still ', thisNum)
-      // console.log('compareNum is now ', compareNum)
 
       let prevState = {difference: 0, carry: 0}
       let difference = []
@@ -291,7 +263,6 @@ class NumberOfUnusualSize{
         difference.shift()
         k++
       }
-      console.log (`difference is ${difference}`)
 
       this.numberStore = difference
     }
