@@ -12,7 +12,7 @@ The use of NOUS to pull in user-generated private keys.
 ## Diffie-Hellman Handshake
 1. clone down the repo from git
 2. open two terminal windows and navigate to the project directory
-3. npm install
+3. `npm install`
 4. in one terminal, `npm run server`
 5. in another terminal, `npm run client`
 6. note that these two services use ports 3000 and 3001.  Feel free to change.

@@ -1,4 +1,5 @@
 class NumberOfUnusualSize{
+  //accepts arrays, numbers, and strings as initial values
   constructor(initialValue) {
     this.numberStore = []
     if (Array.isArray(initialValue)) {
@@ -20,7 +21,7 @@ class NumberOfUnusualSize{
         msd += (this.numberStore[k])
       }
       return msd
-    } else { //maybe enable for numbers over ...50 digits long?
+    } else {
       let padding=100
       let lsd = ''
       if (padding*2 <= this.numberStore.length) {
@@ -45,8 +46,8 @@ class NumberOfUnusualSize{
         const cn = new NumberOfUnusualSize(compareNum)
         return this.equals(cn)
       } else {
-        console.error('Must compare against an int or another NumberOfUnusualSize')
-        console.error("type of ", compareNum, "is ", typeof(compareNum))
+        console.error('Must compare against a number or another NumberOfUnusualSize')
+        console.error("type of ", compareNum, " is ", typeof(compareNum))
         return false
       }
     }
@@ -162,11 +163,9 @@ class NumberOfUnusualSize{
           let addend = new NumberOfUnusualSize(totals[k])
           sum = sum.add(addend)
         }
-        // let k = 0;
         while (sum.numberStore[0] === 0 && sum.numberStore.length > 1) {
           sum.numberStore.shift()
         }
-
         return sum
       }
     } else {
@@ -175,18 +174,15 @@ class NumberOfUnusualSize{
   }
 
   pow = function(exp) {
-    //todo: allow an exponent of UnusualSize
     let multiplicand = new NumberOfUnusualSize(this.numberStore)
     let product = new NumberOfUnusualSize(this.numberStore)
     let exponent = new NumberOfUnusualSize(exp)
 
     if (exponent instanceof NumberOfUnusualSize) {
-
       while (exponent.getValue() > 1) {
         product = product.multiply(multiplicand)
         exponent.decrement()
       }
-
     } else {
       for (let k = 1; k < exponent; k++) {
         product = product.multiply(multiplicand)
@@ -194,10 +190,8 @@ class NumberOfUnusualSize{
     }
 
 
-    // let k = 0;
     while (product.numberStore[0] === 0 && product.numberStore.length > 1) {
       product.numberStore.shift()
-      // k++
     }
     return product
   }
@@ -221,7 +215,6 @@ class NumberOfUnusualSize{
       difference += 10
       returnCarry = 1
     }
-
     return {
       difference: difference,
       carry: returnCarry
@@ -236,12 +229,8 @@ class NumberOfUnusualSize{
       }
     }
     if (!isZero) {
-
-      let subtrahend = 1
-
       let compareNum = [1];
       let thisNum = this.numberStore;
-
 
       const zeroPads = thisNum.length - compareNum.length
       for (let k = 0; k < zeroPads; k++) {
@@ -258,10 +247,8 @@ class NumberOfUnusualSize{
       if (prevState.carry > 0){
         console.error('this should never happen since we are not decrementing from zero')
       }
-      let k = 0;
       while (difference[0] === 0 && difference.length > 1) {
         difference.shift()
-        k++
       }
 
       this.numberStore = difference
