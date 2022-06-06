@@ -20,5 +20,6 @@ The use of NOUS to pull in user-generated private keys.
 8. profit
 
 ## Numbers of Unusual Size
-* `npm run test` to see Jest tests passing
+* `npm run test` to see Jest tests passing\
+note: the final test does take a minute to run (40 sec on my machine)
 
