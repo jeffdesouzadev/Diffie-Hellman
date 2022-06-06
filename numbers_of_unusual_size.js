@@ -16,12 +16,13 @@ class NumberOfUnusualSize{
 
   toString() {
     let msd = ''
-    if (this.numberStore.length < 400) {
+    // if (this.numberStore.length < 400) {
+    if (true) {
       for (let k = 0; k < this.numberStore.length; k++){
         msd += (this.numberStore[k])
       }
       return msd
-    } else {
+    } else { //breaking tests
       let padding=100
       let lsd = ''
       if (padding*2 <= this.numberStore.length) {
